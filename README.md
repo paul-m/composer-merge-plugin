@@ -173,6 +173,19 @@ as `composer run-script my-cool-command` but will not be available using the
 normal `composer my-cool-command` shortcut.
 
 
+Caveats
+-------
+
+Since this package is a Composer plugin, it inherits some limitations from that
+system. For instance, if you rely on merged configuration for a merged plugin,
+this could lead to a race condition between that plugin and this one.
+
+An example of this would be the composer/installers package. If a merged
+`composer.json` file requires composer/installers and also configures special
+installation paths, Composer might end up allowing composer/installers to do
+its work before this plugin has had a chance to merge the special-case config.
+
+
 Running tests
 -------------
 
